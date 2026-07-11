@@ -10,7 +10,7 @@ export const NewsletterForm: React.FC = () => {
     setStatus('loading');
 
     try {
-      const response = await fetch('/api/subscribe', {
+      const response = await fetch('/.netlify/functions/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -35,7 +35,7 @@ export const NewsletterForm: React.FC = () => {
     <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-lg max-w-md">
       <h3 className="text-xl font-bold font-mono text-white mb-2">Join the Dev Journal</h3>
       <p className="text-zinc-400 text-sm mb-4">Daily micro-insights on engineering and tech ecosystem changes.</p>
-      
+
       <form onSubmit={handleSubscribe} className="flex gap-2">
         <input
           type="email"
@@ -54,7 +54,7 @@ export const NewsletterForm: React.FC = () => {
           {status === 'loading' ? '...' : 'Subscribe'}
         </button>
       </form>
-      
+
       {message && (
         <p className={`mt-3 text-xs font-mono ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
           {message}
