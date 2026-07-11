@@ -1,0 +1,16 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+# This ensures your frontend routes don't conflict with serverless functions
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Standard fallback for React Router SPA paths
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
