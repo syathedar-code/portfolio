@@ -1,11 +1,11 @@
 name: Broadcast Daily Newsletter
 
-on:
-  push:
-    paths:
-      - 'src/content/newsletter/**' # Only triggers when files inside this folder change
-    branches:
-      - main
+# on:
+#   push:
+#     paths:
+#       - 'src/content/newsletter/**' # Only triggers when files inside this folder change
+#     branches:
+#       - main
 
 jobs:
   broadcast:
@@ -17,7 +17,7 @@ jobs:
       - name: Set up Node.js Environment
         uses: actions/setup-node@v4
         with:
-          node-node-version: 20
+          node-version: 20
 
       - name: Install Dependencies
         run: npm ci
