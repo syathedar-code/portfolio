@@ -25,5 +25,4 @@ jobs:
       - name: Run Broadcast Automation Script
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
         run: node scripts/broadcast-newsletter.js

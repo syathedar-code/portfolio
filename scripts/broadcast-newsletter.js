@@ -3,12 +3,6 @@ import path from 'path';
 
 async function broadcast() {
   const apiKey = process.env.RESEND_API_KEY;
-  const audienceId = process.env.RESEND_AUDIENCE_ID;
-
-  if (!apiKey || !audienceId) {
-    console.error('❌ Missing environment variables for broadcasting.');
-    process.exit(1);
-  }
 
   const dirPath = path.join(process.cwd(), 'src/content/newsletter');
   
