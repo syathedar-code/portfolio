@@ -45,13 +45,15 @@ export default function Certifications() {
             variants={rowVariants}
             whileHover={shouldReduceMotion ? {} : { x: 4 }}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            className="flex justify-between border-b border-line py-2.5 text-text-dim transition-colors duration-200 hover:text-text cursor-default group"
+            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4 border-b border-line py-2.5 text-text-dim transition-colors duration-200 hover:text-text cursor-default group"
           >
             <span className="text-text-dim group-hover:text-text transition-colors duration-200">
               <span className="text-teal group-hover:text-amber transition-colors duration-200 mr-2">&gt;</span>
               {cert.name} — {cert.issuer}
             </span>
-            <span className="text-text-faint group-hover:text-text-dim transition-colors duration-200">{cert.date}</span>
+            <span className="text-text-faint group-hover:text-text-dim transition-colors duration-200 pl-5 sm:pl-0 text-xs sm:text-[13.5px] whitespace-nowrap">
+              {cert.date}
+            </span>
           </motion.div>
         ))}
       </div>

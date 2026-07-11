@@ -40,39 +40,39 @@ export default function Contact() {
     >
       <SectionHeading index="06" command="./contact --reach-out" id="contact-heading" />
       <div className="rounded border border-line bg-bg-panel px-[26px] py-7 font-mono text-sm transition-all duration-200 hover:border-teal/30">
-        <div className="mb-2.5 text-text-dim flex items-center gap-2 group">
-          <span className="text-teal w-20 transition-colors duration-200 group-hover:text-amber">email</span>
+        <div className="mb-2.5 text-text-dim flex flex-wrap items-baseline gap-x-2 gap-y-0.5 group">
+          <span className="text-teal w-20 shrink-0 transition-colors duration-200 group-hover:text-amber">email</span>
           <a 
             href={`mailto:${contact.email}`} 
-            className="border-b border-transparent text-amber hover:border-amber transition-colors duration-200"
+            className="border-b border-transparent text-amber hover:border-amber transition-colors duration-200 break-all"
           >
             {contact.email}
           </a>
         </div>
-        <div className="mb-2.5 text-text-dim flex items-center gap-2 group">
-          <span className="text-teal w-20 transition-colors duration-200 group-hover:text-amber">linkedin</span>
+        <div className="mb-2.5 text-text-dim flex flex-wrap items-baseline gap-x-2 gap-y-0.5 group">
+          <span className="text-teal w-20 shrink-0 transition-colors duration-200 group-hover:text-amber">linkedin</span>
           <a
             href={contact.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="border-b border-transparent text-amber hover:border-amber transition-colors duration-200"
+            className="border-b border-transparent text-amber hover:border-amber transition-colors duration-200 break-all"
           >
             {contact.linkedin.replace("https://", "")}
           </a>
         </div>
-        <div className="mb-2.5 text-text-dim flex items-center gap-2 group">
-          <span className="text-teal w-20 transition-colors duration-200 group-hover:text-amber">instagram</span>
+        <div className="mb-2.5 text-text-dim flex flex-wrap items-baseline gap-x-2 gap-y-0.5 group">
+          <span className="text-teal w-20 shrink-0 transition-colors duration-200 group-hover:text-amber">instagram</span>
           <a
             href={contact.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="border-b border-transparent text-amber hover:border-amber transition-colors duration-200"
+            className="border-b border-transparent text-amber hover:border-amber transition-colors duration-200 break-all"
           >
             {contact.instagram.replace("https://", "").replace("www.", "")}
           </a>
         </div>
-        <div className="mb-4 text-text-dim flex items-center gap-2 group">
-          <span className="text-teal w-20 transition-colors duration-200 group-hover:text-amber">location</span>
+        <div className="mb-4 text-text-dim flex flex-wrap items-baseline gap-x-2 gap-y-0.5 group">
+          <span className="text-teal w-20 shrink-0 transition-colors duration-200 group-hover:text-amber">location</span>
           <span className="text-text-dim transition-colors duration-200 group-hover:text-text">{contact.location}</span>
         </div>
         <div className="mt-5 pt-5 border-t border-line flex flex-col sm:flex-row sm:items-center justify-between gap-4">
