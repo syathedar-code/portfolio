@@ -1,0 +1,29 @@
+name: Broadcast Daily Newsletter
+
+on:
+  push:
+    paths:
+      - 'src/content/newsletter/**' # Only triggers when files inside this folder change
+    branches:
+      - main
+
+jobs:
+  broadcast:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-node-version: 20
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Broadcast Automation Script
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
+        run: node scripts/broadcast-newsletter.js

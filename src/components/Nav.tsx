@@ -9,6 +9,8 @@ const links = [
   { href: "/#experience", label: "experience" },
   { href: "/#projects", label: "projects" },
   { href: "/#contact", label: "contact" },
+  { href: "/blog", label: "blog" },
+  { href: "/newsletter", label: "newsletter" },
 ];
 
 export default function Nav() {
@@ -43,11 +45,6 @@ export default function Nav() {
               </Link>
             </li>
           ))}
-          <li className="before:mr-[3px] before:text-text-faint before:content-['#']">
-            <Link to="/blog" className="text-text-dim transition-colors hover:text-amber">
-              blog
-            </Link>
-          </li>
         </ul>
 
         {/* Mobile Menu Button */}
@@ -83,15 +80,6 @@ export default function Nav() {
                   </Link>
                 </li>
               ))}
-              <li className="flex items-center before:mr-[6px] before:text-text-faint before:content-['#']">
-                <Link
-                  to="/blog"
-                  onClick={() => setIsOpen(false)}
-                  className="text-text-dim transition-colors hover:text-amber block w-full"
-                >
-                  blog
-                </Link>
-              </li>
             </ul>
           </motion.div>
         )}

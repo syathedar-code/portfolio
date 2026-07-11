@@ -6,6 +6,8 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import Newsletter from "./pages/Newsletter";
+import NewsletterPost from "./pages/NewsletterPost";
 import Intro from "./components/Intro";
 
 export default function App() {
@@ -41,6 +43,8 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/newsletter" element={<Newsletter />} />
+              <Route path="/newsletter/:slug" element={<NewsletterPost />} />
             </Route>
           </Routes>
         </BrowserRouter>
