@@ -1,7 +1,7 @@
 ---
 title: "Threat Modeling Side Projects."
 date: "2026-07-11"
-summary: "We secure production enterprise apps, but leave our pet projects wide open. Here is how I built a lightweight STRIDE framework for my own build pipeline."
+excerpt: "We secure production enterprise apps, but leave our pet projects wide open. Here is how I built a lightweight STRIDE framework for my own build pipeline."
 draft: false
 ---
 
