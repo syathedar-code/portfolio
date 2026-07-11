@@ -1,0 +1,77 @@
+:root {
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+  --font-sans: "Inter", -apple-system, "Segoe UI", sans-serif;
+
+  --color-bg: #0b0d0c;
+  --color-bg-raised: #12140f;
+  --color-bg-panel: #171911;
+  --color-amber: #f2a93c;
+  --color-amber-dim: #b87f28;
+  --color-teal: #4fd1ae;
+  --color-teal-dim: #2e8c71;
+  --color-danger: #e2504a;
+  --color-text: #e9e6da;
+  --color-text-dim: #9a9784;
+  --color-text-faint: #5c5a4e;
+  --color-line: #26271d;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background-color: var(--color-amber);
+    color: var(--color-bg);
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1.1s steps(1) infinite;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(242, 169, 60, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242, 169, 60, 0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse 100% 60% at 50% 0%, black 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 100% 60% at 50% 0%, black 40%, transparent 100%);
+}
