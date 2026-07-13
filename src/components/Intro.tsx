@@ -48,7 +48,7 @@ export default function Intro({ onComplete }: IntroProps) {
 
     const runSequence = async () => {
       // Step 1: BIOS Header
-      addLog("SYED_BIOS (R) v2.46.0-AppSec", "text-amber font-bold");
+      addLog("SYED_BIOS (R) v2.4.6-AppSec", "text-amber font-bold");
       await sleep(100);
       addLog("CPU: AMD EPYC SECURITY ENCLAVE v6", "text-text-faint");
       await sleep(80);
@@ -130,11 +130,11 @@ export default function Intro({ onComplete }: IntroProps) {
       className="fixed inset-0 z-[9999] flex flex-col justify-between bg-bg p-6 md:p-12 font-mono text-[13px] text-text select-none overflow-hidden"
     >
       {/* Scanlines / CRT Simulation */}
-      <div 
-        className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(11,13,12,0)_50%,rgba(11,13,12,0.35)_50%)] bg-[length:100%_4px] opacity-25 z-50" 
-        aria-hidden="true" 
+      <div
+        className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(11,13,12,0)_50%,rgba(11,13,12,0.35)_50%)] bg-[length:100%_4px] opacity-25 z-50"
+        aria-hidden="true"
       />
-      
+
       {/* Top Header Row */}
       <div className="flex items-center justify-between border-b border-line pb-3 opacity-60">
         <span className="flex items-center gap-2">
@@ -180,7 +180,7 @@ export default function Intro({ onComplete }: IntroProps) {
             </div>
 
             {showStatus && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.25 }}

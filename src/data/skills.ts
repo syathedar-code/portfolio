@@ -5,7 +5,7 @@ export const skills: ServiceGroup[] = [
     id: "languages",
     name: "languages.service",
     // status: "active",
-    items: ["Python", "JavaScript", "HTML", "CSS", "SQL"],
+    items: ["Python", "JavaScript", "TypeScript", "SQL"],
   },
   {
     id: "frontend",
@@ -23,18 +23,18 @@ export const skills: ServiceGroup[] = [
     id: "data",
     name: "data.service",
     // status: "active",
-    items: ["MySQL", "Schema design", "Query optimisation"],
+    items: ["MySQL", "PostgreSQL", "Schema design", "Query optimisation"],
   },
   {
     id: "security",
     name: "security.service",
-    // status: "hardening",
-    items: ["Kali / Ubuntu", "SafeLine WAF", "SSL/TLS", "Log analysis", "Docker"],
+    // status: "active",
+    items: ["Linux", "SafeLine WAF", "SSL/TLS", "Log analysis", "OWASP ZAP"],
   },
   {
     id: "tooling",
     name: "tooling.service",
     // status: "active",
-    items: ["Git", "VS Code", "VirtualBox", "Scikit-learn", "NumPy"],
+    items: ["Git", "VS Code", "VirtualBox", "Docker", "Github"],
   },
 ];

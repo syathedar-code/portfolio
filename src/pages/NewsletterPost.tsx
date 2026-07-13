@@ -1,5 +1,6 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm"; // Imported to handle tables and task lists cleanly
 import { motion, useReducedMotion, Variants } from "motion/react";
 import { newsletters } from "../lib/newsletters";
 
@@ -48,7 +49,45 @@ export default function NewsletterPost() {
       {/* Body */}
       <div className="prose prose-invert text-text-dim">
         <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
           components={{
+            // Custom Markdown structures for list block wrappers
+            ul: ({ children }) => (
+              <ul className="list-disc list-inside pl-5 my-4 space-y-1.5 marker:text-teal">
+                {children}
+              </ul>
+            ),
+            ol: ({ children }) => (
+              <ol className="list-decimal list-inside pl-5 my-4 space-y-1.5 marker:text-teal">
+                {children}
+              </ol>
+            ),
+            li: ({ children, ...props }) => {
+              // Check if this item is a GFM task list checkbox
+              const hasCheckbox = props.className?.includes("task-list-item");
+              return (
+                <li 
+                  {...props} 
+                  className={`text-[14.5px] leading-relaxed ${hasCheckbox ? "list-none -ml-5" : ""}`}
+                >
+                  {children}
+                </li>
+              );
+            },
+            table: ({ children }) => (
+              <table className="w-full border-collapse my-6 font-mono text-xs">
+                {children}
+              </table>
+            ),
+            thead: ({ children }) => (
+              <thead className="border-b border-line">{children}</thead>
+            ),
+            th: ({ children }) => (
+              <th className="px-4 py-2 text-left font-semibold">{children}</th>
+            ),
+            td: ({ children }) => (
+              <td className="px-4 py-2 border-t border-line">{children}</td>
+            ),
             a: ({ href, children }) => (
               <a
                 href={href}
@@ -65,12 +104,6 @@ export default function NewsletterPost() {
                 alt={alt}
                 className="rounded border border-line my-4 transition-all hover:border-amber-dim"
               />
-            ),
-            // Style checklist items
-            li: ({ children, ...props }) => (
-              <li {...props} className="marker:text-teal">
-                {children}
-              </li>
             ),
           }}
         >

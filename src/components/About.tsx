@@ -30,26 +30,48 @@ export default function About() {
       viewport={{ once: true, margin: "-100px" }}
       variants={sectionVariants}
     >
-      <SectionHeading index="01" command="cat about.txt" id="about-heading" />
-      <div className="max-w-[640px] text-[15.5px] text-text-dim">
-        <p className="mb-3.5">
-          I'm a full stack developer who splits time between building product features and
-          testing how they hold up under attack. At Cology Labs I work across the frontend,
-          backend, and database layers of a live pharma simulation platform used by pharmacy
-          students. Outside of work, I run a home lab where I stand up vulnerable environments on
-          purpose — DVWA behind a SafeLine WAF, SSL/TLS from scratch, log-based incident triage —
-          to understand both sides of the systems I build.
-        </p>
+      {/* Changed command to about.md to dynamically match our styled text highlights */}
+      <SectionHeading index="01" command="cat about.md" id="about-heading" />
+
+      <div className="max-w-[640px] text-[14.5px] text-text-dim leading-relaxed space-y-4">
         <p>
-          I'm currently looking at roles across development, AppSec, and L1 support — anywhere
-          that values someone who can write the feature and reason about how it fails.
+          I am a <span className="text-text font-semibold">Full-Stack Developer</span> focused on
+          <span className="text-text font-semibold"> Application Security</span> bridging the gap between feature engineering and defensive security.
+          My development philosophy is simple: you cannot truly secure a system until you understand
+          how to build it, and you cannot safely build a feature until you predict how it will fail.
+        </p>
+
+        <p>
+          Through active defensive home lab deployments, I translate theoretical vulnerabilities into
+          concrete protections. This includes configuring network perimeters via a SafeLine WAF,
+          building zero-dependency SSL/TLS pipelines from scratch, and executing log-based incident triage.
+          This hands-on research allows me to build applications with resilient guardrails baked directly
+          into the codebase.
+        </p>
+
+        <p>
+          Currently seeking cross-functional engineering, AppSec, or technical operations roles where
+          deep systems reasoning and secure development practices are highly valued.
         </p>
       </div>
-      <dl className="mt-6 grid max-w-[420px] grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 font-mono text-[13px] text-text-faint">
+
+      {/* Meticulously aligned data list with fixed key width column tracking */}
+      <dl className="mt-8 max-w-[460px] space-y-2 font-mono text-[13px] text-text-faint">
         {meta.map(([key, value]) => (
-          <div key={key} className="contents group">
-            <dt className="text-teal transition-colors duration-200 group-hover:text-amber">{key}</dt>
-            <dd className="transition-colors duration-200 group-hover:text-text">{value}</dd>
+          <div key={key} className="flex group select-none">
+            {/* Setting a fixed 24-unit width forces everything on the right side to snap into vertical line alignment */}
+            <dt className="w-24 text-teal transition-colors duration-200 group-hover:text-amber shrink-0">
+              {key}:
+            </dt>
+            <dd className="transition-colors duration-200 text-text-dim group-hover:text-text">
+              {key === "status" ? (
+                <span className="text-amber font-semibold uppercase tracking-wide animate-pulse">
+                  {value}
+                </span>
+              ) : (
+                value
+              )}
+            </dd>
           </div>
         ))}
       </dl>

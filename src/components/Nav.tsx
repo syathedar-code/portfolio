@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react"; // adjusting icons based on your layout
 import { motion, AnimatePresence } from "motion/react";
 
 const links = [
@@ -24,20 +24,21 @@ export default function Nav() {
   return (
     <nav
       aria-label="Section navigation"
-      className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-sm"
+      className="sticky top-0 z-50 w-full border-b border-line bg-bg/90 backdrop-blur-sm"
     >
-      <div className="mx-auto flex h-[52px] max-w-[920px] items-center justify-between px-6 font-mono text-[13px]">
+      {/* INNER ALIGNMENT LAYER: Spans beautifully to max-w-7xl matching your content */}
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-8 flex h-[52px] items-center justify-between font-mono text-[14px]">
         <Link
           to="/"
           onClick={scrollToTop}
-          className="flex items-center gap-2.5 text-text-dim transition-colors hover:text-amber"
+          className="flex items-center gap-2.5 text-text-dim transition-colors hover:text-amber min-w-0"
         >
-          <span className="h-2 w-2 rounded-full bg-teal shadow-[0_0_6px_var(--color-teal)]" aria-hidden="true" />
-          <span>syed@portfolio ~ status: online</span>
+          <span className="h-2 w-2 rounded-full bg-teal shadow-[0_0_6px_var(--color-teal)] shrink-0" aria-hidden="true" />
+          <span className="truncate">syed@portfolio ~ status: online</span>
         </Link>
-        
+
         {/* Desktop Links */}
-        <ul className="hidden gap-5 sm:flex">
+        <ul className="hidden gap-5 sm:flex shrink-0">
           {links.map((link) => (
             <li key={link.href} className="before:mr-[3px] before:text-text-faint before:content-['#']">
               <Link to={link.href} className="text-text-dim transition-colors hover:text-amber">
@@ -50,7 +51,7 @@ export default function Nav() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex h-8 w-8 items-center justify-center rounded border border-line text-text-dim hover:border-amber hover:text-amber sm:hidden focus:outline-none"
+          className="flex h-8 w-8 items-center justify-center rounded border border-line text-text-dim hover:border-amber hover:text-amber sm:hidden focus:outline-none shrink-0"
           aria-expanded={isOpen}
           aria-label="Toggle navigation menu"
         >
@@ -58,7 +59,7 @@ export default function Nav() {
         </button>
       </div>
 
-      {/* Mobile Menu Panel */}
+      {/* Mobile Menu Panel (Requires your motion/react import lines!) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div

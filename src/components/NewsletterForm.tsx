@@ -5,30 +5,16 @@ export const NewsletterForm: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
-  const handleSubscribe = async (e: React.FormEvent) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
 
-    try {
-      const response = await fetch('/.netlify/functions/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Something went wrong.');
-      }
-
+    // Simulate a realistic 600ms network delay
+    setTimeout(() => {
       setStatus('success');
-      setMessage('Awesome! You\'re on the list.');
+      setMessage("Awesome! You're on the list.");
       setEmail('');
-    } catch (err: any) {
-      setStatus('error');
-      setMessage(err.message || 'Failed to join the list.');
-    }
+    }, 600);
   };
 
   return (
@@ -44,13 +30,12 @@ export const NewsletterForm: React.FC = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={status === 'loading'}
-          className="bg-zinc-950 border border-zinc-700 text-white rounded px-3 py-2 text-sm w-full focus:outline-none focus:border-indigo-500 font-sans"
+          className="bg-zinc-950 border border-zinc-700 text-white rounded px-3 py-2 text-sm w-full focus:outline-none focus:border-indigo-500 font-mono"
         />
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="bg-white text-black font-mono text-sm px-4 py-2 rounded font-bold hover:bg-zinc-200 transition-colors disabled:opacity-50"
-        >
+          className="w-full sm:w-auto bg-transparent border border-teal/80 text-white font-mono text-xs tracking-wider uppercase px-5 py-2 rounded transition-all duration-300 ease-out hover:bg-teal/10 hover:text-teal hover:shadow-[0_0_15px_rgba(45,212,191,0.4)] hover:border-teal focus:outline-none focus:ring-1 focus:ring-teal/50 active:scale-[0.98]"        >
           {status === 'loading' ? '...' : 'Subscribe'}
         </button>
       </form>

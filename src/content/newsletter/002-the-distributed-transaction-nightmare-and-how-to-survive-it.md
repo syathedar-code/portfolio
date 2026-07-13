@@ -1,6 +1,6 @@
 ---
 title: "The Distributed Transaction Nightmare (And How to Survive It)"
-date: "2026-07-12"
+date: "2026-07-13"
 issue: "#002"
 excerpt: "Breaking up a monolith into microservices sounds great until an order processes, a payment gateway fails, and your database goes out of sync. Enter the Saga Pattern."
 ---

@@ -1,4 +1,3 @@
-// src/lib/posts.ts
 export interface Post {
   slug: string;
   title: string;

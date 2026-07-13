@@ -71,6 +71,19 @@ export default function Contact() {
             {contact.instagram.replace("https://", "").replace("www.", "")}
           </a>
         </div>
+        {contact.github && (
+          <div className="mb-2.5 text-text-dim flex flex-wrap items-baseline gap-x-2 gap-y-0.5 group">
+            <span className="text-teal w-20 shrink-0 transition-colors duration-200 group-hover:text-amber">github</span>
+            <a
+              href={contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-b border-transparent text-amber hover:border-amber transition-colors duration-200 break-all"
+            >
+              {contact.github.replace("https://", "")}
+            </a>
+          </div>
+        )}
         <div className="mb-4 text-text-dim flex flex-wrap items-baseline gap-x-2 gap-y-0.5 group">
           <span className="text-teal w-20 shrink-0 transition-colors duration-200 group-hover:text-amber">location</span>
           <span className="text-text-dim transition-colors duration-200 group-hover:text-text">{contact.location}</span>
@@ -84,7 +97,7 @@ export default function Contact() {
             className="inline-flex items-center justify-center gap-2 rounded-[3px] border border-amber bg-transparent px-4 py-2 font-mono text-xs font-semibold text-amber transition-all duration-200 hover:bg-amber hover:text-bg hover:shadow-[0_0_12px_rgba(242,169,60,0.3)]"
           >
             <Download size={13} />
-            download cv
+            download_cv.pdf
           </a>
         </div>
       </div>

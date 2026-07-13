@@ -1,4 +1,3 @@
-// src/lib/newsletters.ts
 export interface NewsletterIssue {
   slug: string;
   title: string;

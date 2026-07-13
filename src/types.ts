@@ -27,6 +27,10 @@ export interface Certification {
   name: string;
   issuer: string;
   date: string;
+  id?: string;
+  credentialId?: string;
+  skills?: string[];
+  previewUrl?: string;
 }
 
 export interface ContactInfo {
@@ -34,4 +38,13 @@ export interface ContactInfo {
   linkedin: string;
   location: string;
   instagram: string;
+  github?: string;
+}
+
+export interface Item {
+  id: string;
+  title: string;
+  excerpt: string;
+  category: "blog" | "newsletter";
+  date: string; // ISO format: "2026-03-15"
 }
