@@ -1,6 +1,6 @@
 ---
 title: "Hardening a LAMP Stack with SafeLine WAF"
-date: "2026-07-15"
+date: "2026-07-12"
 excerpt: "Building a vulnerable web application, securing it with SafeLine WAF, and observing how real-world attacks are detected and blocked."
 ---
 

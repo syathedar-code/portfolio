@@ -29,8 +29,7 @@ try {
         hour12: true,
     });
 
-    // 👇 Change this once, to the day your portfolio first went live.
-    const launchDate = new Date("2026-07-13");
+    const launchDate = new Date("2026-07-12");
 
     const uptimeDays = Math.floor(
         (Date.now() - launchDate.getTime()) / (1000 * 60 * 60 * 24)
