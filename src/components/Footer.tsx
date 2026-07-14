@@ -1,16 +1,17 @@
-import { buildInfo } from "../generated/buildInfo";
-
 export default function Footer() {
-  // Pull fields straight from your build script output properties
-  const commitHash = buildInfo?.commit || "39b115d";
-  const commitMessage = buildInfo?.commitMessage || "chore: upgrade vite to v6 for cloudflare deployment compatibility";
-  const commitDate = buildInfo?.commitDate || "13 Jul 2026";
-  const commitTime = buildInfo?.commitTime || "7:42 pm";
-  const uptime = buildInfo?.uptime || "0 days";
+  // Parse the injected ISO date string safely
+  const commitDateObj = new Date(__COMMIT_DATE__);
+  
+  const commitDate = !isNaN(commitDateObj.getTime())
+    ? commitDateObj.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
+    : "Recent";
+
+  const commitTime = !isNaN(commitDateObj.getTime())
+    ? commitDateObj.toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit", hour12: true }).toLowerCase()
+    : "";
 
   return (
     <footer className="w-full mt-auto">
-      {/* 7xl boundary wrapper keeps everything perfectly aligned with your grid lines */}
       <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
         <div className="w-full border-t border-line my-4" />
 
@@ -22,9 +23,8 @@ export default function Footer() {
               <span className="text-amber font-bold">$</span> git log --oneline -1
             </p>
             <p className="pl-4 text-text">
-              <span className="text-amber font-bold">{commitHash}</span> {commitMessage}
+              <span className="text-amber font-bold">{__COMMIT_HASH__}</span> {__COMMIT_MSG__}
             </p>
-            {/* Renders your en-IN formatted script values side by side */}
             <p className="pl-4 text-text-faint text-[13px]">
               Last commit: {commitDate} • {commitTime}
             </p>
@@ -35,9 +35,10 @@ export default function Footer() {
             <p>
               <span className="text-amber font-bold">$</span> uptime
             </p>
-            <p className="pl-4 text-text">Portfolio uptime: {uptime}</p>
+            <p className="pl-4 text-text">Portfolio uptime: {__UPTIME__}</p>
           </div>
-          {/* CHANGED: Modified size to 11px and applied center justification */}
+
+          {/* Copyright block */}
           <div className="text-center text-text-faint text-[11px] pt-2">
             © {new Date().getFullYear()} Built by Syed Maaz Athar
           </div>
