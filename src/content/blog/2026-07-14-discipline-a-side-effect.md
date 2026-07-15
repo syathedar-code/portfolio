@@ -26,7 +26,8 @@ Over the past year, I've been trying to write more.
 Not because someone asked me to.
 Not because I suddenly became passionate about writing.
 Simply because I wanted to become someone who documents what he learns.
-At first, every article felt like a fight.
+At first, writing anything at all
+ felt like a fight.
 I'd wait for motivation.
 I'd convince myself I needed the perfect idea.
 I'd spend more time thinking about writing than actually writing.
