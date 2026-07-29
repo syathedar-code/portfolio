@@ -3,25 +3,10 @@
 
 > A modern developer portfolio, technical blog, and newsletter platform built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**. Designed with an application security and Linux terminal aesthetic, it showcases projects, engineering articles, certifications, and professional experience through a fast, static-first architecture.
 
-**Live Demo:** https://your-domain.com  
-**Blog:** https://your-domain.com/blog  
-**Newsletter:** https://your-domain.com/newsletter  
+**Live Demo:** https://syedathar-portfolio.pages.dev
+**Blog:** https://syedathar-portfolio.pages.dev/blog  
+**Newsletter:** https://syedathar-portfolio.pages.dev/newsletter  
 **Resume:** `/Syed_Maaz_Athar_CV.pdf`
-
----
-
-## Preview
-
-> Replace this section with screenshots or GIFs.
-
-- Homepage
-- Intro Animation
-- Blog
-- Newsletter
-- 3D 404 Page
-- Mobile View
-
----
 
 # Features
 
@@ -67,7 +52,7 @@
 # Quick Start
 
 ```bash
-git clone https://github.com/syed-maaz-athar/portfolio.git
+git clone https://github.com/syathedar-code/portfolio.git
 
 cd portfolio
 
@@ -200,27 +185,13 @@ Output Directory: dist
 SPA routing is handled through `public/_redirects`:
 
 ```text
-/blog          /index.html 200
-/blog/*        /index.html 200
-
-/newsletter    /index.html 200
-/newsletter/*  /index.html 200
+/*   /index.html   200
 ```
 
 A static `404.html` is intentionally **not** included, allowing React Router to handle unknown routes consistently.
 
 ---
 
-# Roadmap
-
-- RSS feed generation
-- OpenGraph image generation
-- Offline support (PWA)
-- Client-side search indexing
-- Additional technical blog series
-
----
-
 # License
 
-Distributed under the MIT License.
+MIT
