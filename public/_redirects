@@ -1,4 +1,10 @@
-/blog           /index.html   200
-/blog/*         /index.html   200
-/newsletter     /index.html   200
-/newsletter/*   /index.html   200
+# SPA routing for React Router
+# Force (!) prevents Cloudflare trailing-slash redirects
+
+/blog             /index.html   200!
+/blog/            /index.html   200!
+/blog/*           /index.html   200!
+
+/newsletter       /index.html   200!
+/newsletter/      /index.html   200!
+/newsletter/*     /index.html   200!

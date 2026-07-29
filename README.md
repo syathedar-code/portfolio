@@ -3,10 +3,12 @@
 
 > A modern developer portfolio, technical blog, and newsletter platform built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**. Designed with an application security and Linux terminal aesthetic, it showcases projects, engineering articles, certifications, and professional experience through a fast, static-first architecture.
 
-**Live Demo:** https://syedathar-portfolio.pages.dev
-**Blog:** https://syedathar-portfolio.pages.dev/blog  
-**Newsletter:** https://syedathar-portfolio.pages.dev/newsletter  
+**Live Demo:** https:syedathar-portfolio.pages.dev  
+**Blog:** https://syedathar-portfolio/blog  
+**Newsletter:** https://syedathar-portfolio/newsletter  
 **Resume:** `/Syed_Maaz_Athar_CV.pdf`
+
+---
 
 # Features
 
@@ -185,7 +187,13 @@ Output Directory: dist
 SPA routing is handled through `public/_redirects`:
 
 ```text
-/*   /index.html   200
+/blog             /index.html   200!
+/blog/            /index.html   200!
+/blog/*           /index.html   200!
+
+/newsletter       /index.html   200!
+/newsletter/      /index.html   200!
+/newsletter/*     /index.html   200!
 ```
 
 A static `404.html` is intentionally **not** included, allowing React Router to handle unknown routes consistently.
