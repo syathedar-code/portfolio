@@ -39,7 +39,7 @@ export default function NotFound() {
           margin: 0;
           padding: 0;
           width: 100%;
-          height: 100vh;
+          height: 100dvh;
           background: #000;
           overflow: hidden;
           font-family: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
@@ -55,19 +55,15 @@ export default function NotFound() {
           box-sizing: border-box;
         }
 
-        .notfound-page html,
-        .notfound-page body {
-          height: 100%;
-        }
-
         .notfound-page .stage {
           position: relative;
           width: 100%;
-          height: 100vh;
+          height: 100dvh;
           display: flex;
           justify-content: center;
           align-items: center;
           perspective: 1000px;
+          overflow: hidden;
         }
 
         .notfound-page div {
@@ -260,10 +256,11 @@ export default function NotFound() {
           font-family: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
           color: #fff;
           z-index: 100;
+          max-width: 90vw;
         }
 
         .notfound-page .terminal-text .line {
-          font-size: 1rem;
+          font-size: clamp(0.75rem, 2.5vw, 1rem);
           letter-spacing: 0.5px;
           white-space: nowrap;
         }
@@ -283,7 +280,7 @@ export default function NotFound() {
           display: inline-block;
           margin-top: 1.25rem;
           font-family: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
-          font-size: 0.95rem;
+          font-size: clamp(0.8rem, 2.5vw, 0.95rem);
           color: #fff;
           text-decoration: none;
           border: 1px solid #fff;
@@ -305,6 +302,117 @@ export default function NotFound() {
 
         .notfound-page .terminal-text a.home-link::before {
           content: '> ';
+        }
+
+        /* ── Mobile: ≤768px ── */
+        @media (max-width: 768px) {
+          .notfound-page .stage {
+            perspective: 800px;
+          }
+
+          .notfound-page .rail .stamp {
+            width: 140px;
+            height: 140px;
+            font-size: 4.5rem;
+          }
+
+          .notfound-page .world .box {
+            width: 140px;
+            height: 140px;
+          }
+
+          .notfound-page .world .box .wall {
+            width: 140px;
+            height: 140px;
+          }
+
+          .notfound-page .world .box .wall::before {
+            font-size: 4.5rem;
+          }
+
+          .notfound-page .world .box .wall:nth-child(1) { transform: translateZ(70px); }
+          .notfound-page .world .box .wall:nth-child(2) { transform: rotateX(180deg) translateZ(70px); }
+          .notfound-page .world .box .wall:nth-child(3) { transform: rotateX(90deg) translateZ(70px); }
+          .notfound-page .world .box .wall:nth-child(4) { transform: rotateX(-90deg) translateZ(70px); }
+          .notfound-page .world .box .wall:nth-child(5) { transform: rotateY(90deg) translateZ(70px); }
+          .notfound-page .world .box .wall:nth-child(6) { transform: rotateY(-90deg) translateZ(70px); }
+
+          @keyframes nf-stampSlide {
+            0% {
+              transform: rotateX(90deg) rotateZ(-90deg) translateZ(-140px) translateY(130px);
+            }
+            100% {
+              transform: rotateX(90deg) rotateZ(-90deg) translateZ(-140px) translateY(-3870px);
+            }
+          }
+
+          @keyframes nf-slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-140px); }
+          }
+
+          .notfound-page .terminal-text {
+            top: 3%;
+            right: 4%;
+          }
+        }
+
+        /* ── Mobile: ≤480px ── */
+        @media (max-width: 480px) {
+          .notfound-page .stage {
+            perspective: 600px;
+          }
+
+          .notfound-page .rail .stamp {
+            width: 110px;
+            height: 110px;
+            font-size: 3.5rem;
+          }
+
+          .notfound-page .world .box {
+            width: 110px;
+            height: 110px;
+          }
+
+          .notfound-page .world .box .wall {
+            width: 110px;
+            height: 110px;
+          }
+
+          .notfound-page .world .box .wall::before {
+            font-size: 3.5rem;
+          }
+
+          .notfound-page .world .box .wall:nth-child(1) { transform: translateZ(55px); }
+          .notfound-page .world .box .wall:nth-child(2) { transform: rotateX(180deg) translateZ(55px); }
+          .notfound-page .world .box .wall:nth-child(3) { transform: rotateX(90deg) translateZ(55px); }
+          .notfound-page .world .box .wall:nth-child(4) { transform: rotateX(-90deg) translateZ(55px); }
+          .notfound-page .world .box .wall:nth-child(5) { transform: rotateY(90deg) translateZ(55px); }
+          .notfound-page .world .box .wall:nth-child(6) { transform: rotateY(-90deg) translateZ(55px); }
+
+          @keyframes nf-stampSlide {
+            0% {
+              transform: rotateX(90deg) rotateZ(-90deg) translateZ(-110px) translateY(130px);
+            }
+            100% {
+              transform: rotateX(90deg) rotateZ(-90deg) translateZ(-110px) translateY(-3870px);
+            }
+          }
+
+          @keyframes nf-slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-110px); }
+          }
+
+          .notfound-page .terminal-text {
+            top: 2.5%;
+            right: 3%;
+          }
+
+          .notfound-page .terminal-text a.home-link {
+            padding: 5px 10px;
+            margin-top: 0.75rem;
+          }
         }
       `}</style>
 
