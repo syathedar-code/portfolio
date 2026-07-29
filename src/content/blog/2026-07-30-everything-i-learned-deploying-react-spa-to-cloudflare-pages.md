@@ -72,12 +72,10 @@ Opening:
 sometimes became:
 
 ```text
-/newsletter/
+/
 ```
 
 without my application doing anything.
-
-Other times, the opposite happened depending on how Cloudflare interpreted the request.
 
 At first, I assumed React Router was redirecting.
 
@@ -87,7 +85,7 @@ My application never issued a redirect.
 
 The behavior came from **Cloudflare Pages** itself.
 
-Cloudflare automatically normalizes URLs by adding or removing trailing slashes before the request ever reaches your application.
+Cloudflare's `_redirects` engine automatically normalizes URLs by adding or removing trailing slashes before the request ever reaches your application. This only happens when you use explicit `_redirects` rules — the built-in SPA fallback doesn't do this.
 
 This was particularly confusing because client-side navigation behaved perfectly. The unexpected redirect only appeared when the browser made a direct request to Cloudflare, making it look like a React Router problem when it was actually happening at the hosting layer.
 
@@ -95,22 +93,20 @@ That meant React Router never even saw the original URL.
 
 ---
 
-## The Final `_redirects`
+## The Real Root Cause
 
-The solution turned out to be surprisingly small.
+Here's what I discovered: **Cloudflare Pages has two completely different routing systems**.
 
-Cloudflare supports **forced rewrites** using the `!` modifier.
+| System | Trigger | Trailing-Slash Behavior |
+|--------|---------|------------------------|
+| **Built-in SPA fallback** | No `404.html`, no `_redirects` | No normalization — serves `index.html` as-is for all unmatched routes |
+| **`_redirects` engine** | `_redirects` file exists | Trailing-slash normalization enabled — sends 308 redirects for exact path matches |
 
-Appending `!` tells Cloudflare:
+By adding `_redirects` to fix the `404.html` problem, I had **unintentionally switched from the lenient system to the strict system**. The strict system has trailing-slash normalization that breaks `/newsletter` and `/blog` (without trailing slashes).
 
-> "Apply this rewrite exactly as written, and don't perform your own redirect logic."
-
-To ensure both trailing-slash and non-trailing-slash URLs behaved identically, I explicitly mapped every variation.
+I tried forcing rewrites with the `!` modifier:
 
 ```text
-# SPA routing for React Router
-# Force (!) prevents Cloudflare trailing-slash redirects
-
 /blog             /index.html   200!
 /blog/            /index.html   200!
 /blog/*           /index.html   200!
@@ -120,21 +116,24 @@ To ensure both trailing-slash and non-trailing-slash URLs behaved identically, I
 /newsletter/*     /index.html   200!
 ```
 
-Now all of these behave consistently:
+But Cloudflare still applied the 308 redirect **before** evaluating `_redirects` for exact path matches. The `!` flag couldn't override this.
 
-```text
-/blog
-/blog/
-/blog/my-post
+---
 
-/newsletter
-/newsletter/
-/newsletter/my-post
-```
+## The Nuclear Option: Remove Everything
 
-Regardless of how visitors arrive, React Router receives the request exactly as intended.
+After exhausting every configuration option, I realized the simplest solution was also the most counterintuitive:
 
-With that final change in place, the deployment finally behaved the way a production React SPA should.
+**Delete `_redirects` entirely.**
+
+With no `404.html` and no `_redirects`, Cloudflare Pages falls back to its **built-in SPA fallback**:
+
+- All unmatched routes → `index.html`
+- No trailing-slash normalization
+- No 308 redirects
+- React Router handles everything
+
+This is how my portfolio worked originally, before I added the custom 404 page. The only reason I needed `_redirects` was because `404.html` disabled the built-in fallback. Once I moved the 404 page into React Router (`NotFound.tsx`), I no longer needed any routing configuration files at all.
 
 ---
 
@@ -170,7 +169,7 @@ React Router now handles every unknown route.
 <Route path="*" element={<NotFound />} />
 ```
 
-Now, whenever a user visits an invalid URL that's on my portfolio, the request reaches React, React Router fails to find a matching route, and the application renders the animated 404 page instead of Cloudflare serving a static file.
+Now, whenever a user visits an invalid URL, the request reaches React, React Router fails to find a matching route, and the application renders the animated 404 page instead of Cloudflare serving a static file.
 
 The experience stayed exactly the same.
 
@@ -188,6 +187,38 @@ Previously, Cloudflare did.
 Now, React does.
 
 That small architectural change gave the application complete control over its own routing and error experience.
+
+---
+
+## Fixing Invalid Slugs
+
+Moving the 404 page into React exposed another issue.
+
+Invalid slugs like `/newsletter/jhsfdvbvnm` were rendering the newsletter list page instead of the 404 animation.
+
+The problem was in my post components:
+
+```tsx
+// NewsletterPost.tsx — before
+if (!issue) return <Navigate to="/newsletter" replace />;
+
+// BlogPost.tsx — before
+if (!post) return <Navigate to="/blog" replace />;
+```
+
+Instead of showing a 404, they redirected back to the list page.
+
+The fix was simple:
+
+```tsx
+// NewsletterPost.tsx — after
+if (!issue) return <NotFound />;
+
+// BlogPost.tsx — after
+if (!post) return <NotFound />;
+```
+
+Now every invalid route — whether it's a completely random path or a non-existent slug — shows the animated 404.
 
 ---
 
@@ -343,7 +374,9 @@ Some of the biggest takeaways were:
 - A physical `404.html` can prevent React Router from ever handling a request.
 - `_routes.json` is intended for Cloudflare Workers—not static React SPAs.
 - Catch-all rewrites like `/* /index.html 200` can create deployment loops.
-- Cloudflare Pages automatically normalizes trailing slashes unless forced rewrites (`200!`) are used.
+- **Cloudflare Pages has two routing systems: built-in SPA fallback (lenient) and `_redirects` engine (strict with trailing-slash normalization).**
+- **Adding configuration files (`_redirects`, `_routes.json`, `404.html`) switches you from the lenient system to the strict system.**
+- **For a React SPA with client-side 404 handling, the best approach on Cloudflare Pages free tier is no routing config files at all.**
 - React should own application routing—including custom 404 pages.
 - Responsive animations are about adapting layouts, not rewriting animations.
 - Navigation behavior is part of user experience, not just routing.
@@ -375,8 +408,6 @@ Looking back, every problem I encountered had a logical explanation.
 The challenge wasn't solving complex bugs.
 
 It was about understanding where to look.
-
-Once I stopped treating every issue as a React problem and started thinking about the complete request lifecycle, the solutions became much clearer.
 
 ---
 

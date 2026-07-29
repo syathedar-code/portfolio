@@ -29,7 +29,7 @@ export default function NewsletterPost() {
     >
       {/* Back link */}
       <Link
-        to="/newsletter/"
+        to="/newsletter"
         className="mb-8 inline-flex items-center gap-1.5 font-mono text-xs text-text-faint transition-colors duration-200 hover:text-amber"
       >
         <span aria-hidden="true">←</span> all issues
@@ -54,7 +54,7 @@ export default function NewsletterPost() {
       {/* Footer nav */}
       <div className="mt-12 border-t border-line pt-6">
         <Link
-          to="/newsletter/"
+          to="/newsletter"
           className="inline-flex items-center gap-1.5 font-mono text-xs text-text-faint transition-colors duration-200 hover:text-amber"
         >
           <span aria-hidden="true">←</span> back to all issues

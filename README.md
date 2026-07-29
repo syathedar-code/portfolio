@@ -1,11 +1,10 @@
-
 # Syed Maaz Athar — Portfolio & Technical Publishing Platform
 
 > A modern developer portfolio, technical blog, and newsletter platform built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**. Designed with an application security and Linux terminal aesthetic, it showcases projects, engineering articles, certifications, and professional experience through a fast, static-first architecture.
 
-**Live Demo:** https:syedathar-portfolio.pages.dev  
-**Blog:** https://syedathar-portfolio/blog  
-**Newsletter:** https://syedathar-portfolio/newsletter  
+**Live Demo:** https://syedathar-portfolio.pages.dev  
+**Blog:** https://syedathar-portfolio.pages.dev/blog  
+**Newsletter:** https://syedathar-portfolio.pages.dev/newsletter  
 **Resume:** `/Syed_Maaz_Athar_CV.pdf`
 
 ---
@@ -86,7 +85,7 @@ npm run write
 # Project Structure
 ```
 .
-├── public/                # Static public assets (CV PDF, certificate images, favicon, _redirects)
+├── public/                # Static public assets (CV PDF, certificate images, favicon)
 ├── scripts/               # Developer CLI tooling (scaffolding post templates & automated tasks)
 ├── src/
 │   ├── components/        # Hand-crafted UI components (terminal modules, search overlay, layout)
@@ -145,9 +144,9 @@ The application follows a **static-first architecture**. Portfolio data is store
 | Route | Description |
 |------|-------------|
 | `/` | Portfolio homepage |
-| `/blog/` | Blog archive |
+| `/blog` | Blog archive |
 | `/blog/:slug` | Individual blog post |
-| `/newsletter/` | Newsletter archive |
+| `/newsletter` | Newsletter archive |
 | `/newsletter/:slug` | Individual newsletter |
 | `*` | Custom animated React 404 page |
 
@@ -158,6 +157,7 @@ The application follows a **static-first architecture**. Portfolio data is store
 - **BrowserRouter over HashRouter** for clean URLs and improved sharing.
 - **Build-time Markdown loading** using `import.meta.glob` for instant navigation without fetch requests.
 - **React-owned 404 handling** instead of a static `404.html`, ensuring Cloudflare Pages correctly forwards routes to React.
+- **No `_redirects` or `_routes.json`** — Cloudflare Pages' built-in SPA fallback handles all routing when no configuration files are present. This avoids trailing-slash normalization issues that come with explicit `_redirects` rules.
 - **Static-first architecture** keeps deployment simple, fast, and maintenance-free.
 
 ---
@@ -184,19 +184,9 @@ Build Command: npm run build
 Output Directory: dist
 ```
 
-SPA routing is handled through `public/_redirects`:
+SPA routing is handled by **Cloudflare Pages' built-in SPA fallback**. No `_redirects`, `_routes.json`, or `404.html` files are included — this keeps Cloudflare in its lenient routing mode, where all unmatched routes automatically receive `index.html` and React Router takes over.
 
-```text
-/blog             /index.html   200!
-/blog/            /index.html   200!
-/blog/*           /index.html   200!
-
-/newsletter       /index.html   200!
-/newsletter/      /index.html   200!
-/newsletter/*     /index.html   200!
-```
-
-A static `404.html` is intentionally **not** included, allowing React Router to handle unknown routes consistently.
+A static `404.html` is intentionally **not** included, allowing React Router to handle unknown routes consistently and render the custom animated `NotFound.tsx` component.
 
 ---
 

@@ -8,7 +8,7 @@ interface UseIntroStateReturn {
     complete: () => void;
 }
 
-const VALID_ROUTES = ['/', '/blog/', '/newsletter/'] as const;
+const VALID_ROUTES = ['/', '/blog', '/newsletter'] as const;
 
 function isValidRoute(pathname: string): boolean {
     return VALID_ROUTES.some(route => pathname === route || pathname.startsWith(`${route}/`));

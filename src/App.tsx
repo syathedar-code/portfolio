@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
@@ -40,9 +39,9 @@ function AppContent() {
         <Routes location={location} key={location.pathname}>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/blog/" element={<Blog />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/newsletter/" element={<Newsletter />} />
+            <Route path="/newsletter" element={<Newsletter />} />
             <Route path="/newsletter/:slug" element={<NewsletterPost />} />
             <Route path="*" element={<NotFound />} />
           </Route>

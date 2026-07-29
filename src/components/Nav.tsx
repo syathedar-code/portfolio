@@ -15,8 +15,8 @@ const links: NavLink[] = [
   { href: "/#experience", label: "experience", isHash: true },
   { href: "/#projects", label: "projects", isHash: true },
   { href: "/#contact", label: "contact", isHash: true },
-  { href: "/blog/", label: "blog", isHash: false },
-  { href: "/newsletter/", label: "newsletter", isHash: false },
+  { href: "/blog", label: "blog", isHash: false },
+  { href: "/newsletter", label: "newsletter", isHash: false },
 ];
 
 export default function Nav() {
