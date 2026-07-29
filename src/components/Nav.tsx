@@ -1,23 +1,46 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react"; // adjusting icons based on your layout
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
-const links = [
-  { href: "/#about", label: "about" },
-  { href: "/#skills", label: "skills" },
-  { href: "/#experience", label: "experience" },
-  { href: "/#projects", label: "projects" },
-  { href: "/#contact", label: "contact" },
-  { href: "/blog", label: "blog" },
-  { href: "/newsletter", label: "newsletter" },
+interface NavLink {
+  href: string;
+  label: string;
+  isHash: boolean;
+}
+
+const links: NavLink[] = [
+  { href: "/#about", label: "about", isHash: true },
+  { href: "/#skills", label: "skills", isHash: true },
+  { href: "/#experience", label: "experience", isHash: true },
+  { href: "/#projects", label: "projects", isHash: true },
+  { href: "/#contact", label: "contact", isHash: true },
+  { href: "/blog", label: "blog", isHash: false },
+  { href: "/newsletter", label: "newsletter", isHash: false },
 ];
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsOpen(false);
+  };
+
+  // Handle hash link clicks - only scroll if already on homepage
+  const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (location.pathname !== "/") {
+      // If not on homepage, let the browser navigate normally
+      // The target page will handle the hash on mount
+      return;
+    }
+    e.preventDefault();
+    const id = href.replace("/#", "");
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
     setIsOpen(false);
   };
 
@@ -26,7 +49,6 @@ export default function Nav() {
       aria-label="Section navigation"
       className="sticky top-0 z-50 w-full border-b border-line bg-bg/90 backdrop-blur-sm"
     >
-      {/* INNER ALIGNMENT LAYER: Spans beautifully to max-w-7xl matching your content */}
       <div className="w-full max-w-7xl mx-auto px-6 md:px-8 flex h-[52px] items-center justify-between font-mono text-[14px]">
         <Link
           to="/"
@@ -41,9 +63,22 @@ export default function Nav() {
         <ul className="hidden gap-5 sm:flex shrink-0">
           {links.map((link) => (
             <li key={link.href} className="before:mr-[3px] before:text-text-faint before:content-['#']">
-              <Link to={link.href} className="text-text-dim transition-colors hover:text-amber">
-                {link.label}
-              </Link>
+              {link.isHash ? (
+                <a
+                  href={link.href}
+                  onClick={(e) => handleHashClick(e, link.href)}
+                  className="text-text-dim transition-colors hover:text-amber"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  to={link.href}
+                  className="text-text-dim transition-colors hover:text-amber"
+                >
+                  {link.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>
@@ -59,7 +94,7 @@ export default function Nav() {
         </button>
       </div>
 
-      {/* Mobile Menu Panel (Requires your motion/react import lines!) */}
+      {/* Mobile Menu Panel */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -72,13 +107,23 @@ export default function Nav() {
             <ul className="flex flex-col gap-4 px-6 py-5 font-mono text-[14px]">
               {links.map((link) => (
                 <li key={link.href} className="flex items-center before:mr-[6px] before:text-text-faint before:content-['#']">
-                  <Link
-                    to={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-text-dim transition-colors hover:text-amber block w-full"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.isHash ? (
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleHashClick(e, link.href)}
+                      className="text-text-dim transition-colors hover:text-amber block w-full"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-text-dim transition-colors hover:text-amber block w-full"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
