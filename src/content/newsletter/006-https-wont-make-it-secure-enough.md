@@ -1,14 +1,8 @@
 ---
 title: "HTTPS Alone Doesn't Make Your Website Secure"
-excerpt: "HTTPS is essential, but it's only one layer of modern web security. Here's what it protects—and what it doesn't."
 date: 2026-07-16
-author: "Syed Maaz Athar"
-tags:
-  - Security
-  - HTTPS
-  - SSL/TLS
-  - Web Development
-  - AppSec
+issue: "#006"
+excerpt: "HTTPS is essential, but it's only one layer of modern web security. Here's what it protects—and what it doesn't."
 ---
 
 # HTTPS Alone Doesn't Make Your Website Secure

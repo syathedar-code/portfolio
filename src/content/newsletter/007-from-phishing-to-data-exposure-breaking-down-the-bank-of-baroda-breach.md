@@ -3,13 +3,6 @@ title: "From Phishing to Data Exposure: Breaking Down the Bank of Baroda Breach"
 date: "2026-07-29"
 issue: "#007"
 excerpt: "A closer look at what the Bank of Baroda data breach means for customers, how the attack likely unfolded, and the cybersecurity lessons every developer should learn."
-tags:
-  - Cyber Security
-  - Data Breach
-  - Banking
-  - Application Security
-  - Privacy
-  - India
 ---
 
 # When a Bank Gets Breached: Lessons from the Bank of Baroda Data Leak
