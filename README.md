@@ -145,9 +145,9 @@ The application follows a **static-first architecture**. Portfolio data is store
 | Route | Description |
 |------|-------------|
 | `/` | Portfolio homepage |
-| `/blog` | Blog archive |
+| `/blog/` | Blog archive |
 | `/blog/:slug` | Individual blog post |
-| `/newsletter` | Newsletter archive |
+| `/newsletter/` | Newsletter archive |
 | `/newsletter/:slug` | Individual newsletter |
 | `*` | Custom animated React 404 page |
 

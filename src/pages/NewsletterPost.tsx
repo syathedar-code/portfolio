@@ -2,13 +2,14 @@ import { useParams, Navigate, Link } from "react-router-dom";
 import { motion, useReducedMotion, Variants } from "motion/react";
 import { newsletters } from "../lib/newsletters";
 import MarkdownRenderer from "../components/MarkdownRenderer";
+import NotFound from "./NotFound";
 
 export default function NewsletterPost() {
   const { slug } = useParams();
   const issue = newsletters.find((n) => n.slug === slug);
   const shouldReduceMotion = useReducedMotion();
 
-  if (!issue) return <Navigate to="/newsletter" replace />;
+  if (!issue) return <NotFound />;
 
   const pageVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 15 },
@@ -28,7 +29,7 @@ export default function NewsletterPost() {
     >
       {/* Back link */}
       <Link
-        to="/newsletter"
+        to="/newsletter/"
         className="mb-8 inline-flex items-center gap-1.5 font-mono text-xs text-text-faint transition-colors duration-200 hover:text-amber"
       >
         <span aria-hidden="true">←</span> all issues
@@ -53,7 +54,7 @@ export default function NewsletterPost() {
       {/* Footer nav */}
       <div className="mt-12 border-t border-line pt-6">
         <Link
-          to="/newsletter"
+          to="/newsletter/"
           className="inline-flex items-center gap-1.5 font-mono text-xs text-text-faint transition-colors duration-200 hover:text-amber"
         >
           <span aria-hidden="true">←</span> back to all issues

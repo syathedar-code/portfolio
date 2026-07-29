@@ -2,13 +2,14 @@ import { useParams, Navigate } from "react-router-dom";
 import { motion, useReducedMotion, Variants } from "motion/react";
 import { posts } from "../lib/blogs";
 import MarkdownRenderer from "../components/MarkdownRenderer";
+import NotFound from "./NotFound";
 
 export default function BlogPost() {
   const { slug } = useParams();
   const post = posts.find((p) => p.slug === slug);
   const shouldReduceMotion = useReducedMotion();
 
-  if (!post) return <Navigate to="/blog" replace />;
+  if (!post) return <NotFound />;
 
   const pageVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 15 },
