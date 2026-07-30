@@ -3,8 +3,8 @@
 > A modern developer portfolio, technical blog, and newsletter platform built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**. Designed with an application security and Linux terminal aesthetic, it showcases projects, engineering articles, certifications, and professional experience through a fast, static-first architecture.
 
 **Live Demo:** https://syedathar-portfolio.pages.dev  
-**Blog:** https://syedathar-portfolio.pages.dev/blog  
-**Newsletter:** https://syedathar-portfolio.pages.dev/newsletter  
+**Blog:** https://syedathar-portfolio.pages.dev/blog/  
+**Newsletter:** https://syedathar-portfolio.pages.dev/newsletter/  
 **Resume:** `/Syed_Maaz_Athar_CV.pdf`
 
 ---
@@ -144,9 +144,9 @@ The application follows a **static-first architecture**. Portfolio data is store
 | Route | Description |
 |------|-------------|
 | `/` | Portfolio homepage |
-| `/blog` | Blog archive |
+| `/blog/` | Blog archive |
 | `/blog/:slug` | Individual blog post |
-| `/newsletter` | Newsletter archive |
+| `/newsletter/` | Newsletter archive |
 | `/newsletter/:slug` | Individual newsletter |
 | `*` | Custom animated React 404 page |
 

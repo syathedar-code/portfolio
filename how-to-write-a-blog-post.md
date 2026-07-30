@@ -18,7 +18,7 @@ This filename becomes the post's URL: `yoursite.com/blog/my-first-post`.
 ## 2. Add frontmatter at the very top
 
 Every post needs a small metadata block at the top, between two `---` lines.
-This is what powers the title/date/excerpt shown on the `/blog` listing page.
+This is what powers the title/date/excerpt shown on the `/blog/` listing page.
 
 ```markdown
 ---
@@ -119,7 +119,7 @@ That's it — same lab from my resume, written up properly.
 
 Save the file. That's the entire step — no separate "publish" action.
 
-- In local dev (`npm run dev`), it shows up on `/blog` immediately.
+- In local dev (`npm run dev`), it shows up on `/blog/` immediately.
 - For the live site, commit the new `.md` file (and any images) to your
   repo, push, and redeploy as normal (however you're hosting — Vercel,
   Netlify, GitHub Pages, etc. will pick up the new file on the next build).

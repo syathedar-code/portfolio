@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { execSync } from 'child_process';
+import { copyFileSync } from 'fs';
+import { resolve } from 'path';
 
 const getGitMeta = (command: string) => {
   try {
@@ -16,7 +18,18 @@ const uptimeDays = Math.floor((Date.now() - launchDate.getTime()) / (1000 * 60 *
 const uptimeString = `${Math.max(0, uptimeDays)} days`;
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(),
+  {
+    name: 'copy-200-html',
+    closeBundle() {
+      copyFileSync(
+        resolve(__dirname, 'dist/index.html'),
+        resolve(__dirname, 'dist/200.html')
+      );
+      console.log('✓ Created dist/200.html');
+    },
+  },
+  ],
   define: {
     __COMMIT_HASH__: JSON.stringify(getGitMeta('git rev-parse --short HEAD') || '39b115d'),
     __COMMIT_MSG__: JSON.stringify(getGitMeta('git log -1 --pretty=format:%s') || 'update payload logs'),

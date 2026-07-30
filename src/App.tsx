@@ -40,8 +40,10 @@ function AppContent() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/newsletter" element={<Newsletter />} />
+            <Route path="/newsletter/" element={<Newsletter />} />
             <Route path="/newsletter/:slug" element={<NewsletterPost />} />
             <Route path="*" element={<NotFound />} />
           </Route>

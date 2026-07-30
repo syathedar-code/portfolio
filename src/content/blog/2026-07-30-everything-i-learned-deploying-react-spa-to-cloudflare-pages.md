@@ -35,10 +35,10 @@ Here's everything I learned.
 After experimenting with different approaches, I stopped trying to rewrite every request and instead focused only on the routes my application actually owns.
 
 ```text
-/blog          /index.html 200
+/blog/          /index.html 200
 /blog/*        /index.html 200
 
-/newsletter    /index.html 200
+/newsletter/    /index.html 200
 /newsletter/*  /index.html 200
 ```
 

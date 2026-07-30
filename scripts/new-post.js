@@ -34,7 +34,7 @@ async function main() {
 
   if (isNewsletter) {
     // Derive next issue number from existing files in the newsletter directory
-    const newsletterDir = path.join(process.cwd(), 'src/content/newsletter');
+    const newsletterDir = path.join(process.cwd(), 'src/content/newsletter/');
     let nextIssue = 1;
     if (fs.existsSync(newsletterDir)) {
       const existing = fs.readdirSync(newsletterDir)

@@ -1,4 +1,4 @@
-import { useParams, Navigate } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { motion, useReducedMotion, Variants } from "motion/react";
 import { posts } from "../lib/blogs";
 import MarkdownRenderer from "../components/MarkdownRenderer";
